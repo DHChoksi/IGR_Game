@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04028033, g: 0.018327361, b: 0.011104246, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4738,6 +4738,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712235654}
   m_Mesh: {fileID: 1586428044625075342, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
+--- !u!1 &721639858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721639860}
+  - component: {fileID: 721639859}
+  m_Layer: 0
+  m_Name: Post Processing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &721639859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721639858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!4 &721639860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721639858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.816126, y: 6.3080335, z: 2.9890103}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &730798548
 GameObject:
   m_ObjectHideFlags: 0
@@ -12765,6 +12814,7 @@ MonoBehaviour:
   m_OriginalCrosshair: {fileID: 21300000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   m_EnemyTargetColor: {r: 1, g: 0, b: 0, a: 1}
   m_GrabbableTargetColor: {r: 0.0020987988, g: 1, b: 0, a: 1}
+  m_SwingTargetColor: {r: 0, g: 0, b: 0, a: 0}
   m_OriginalColor: {r: 1, g: 1, b: 1, a: 1}
   m_OriginalScale: {x: 1, y: 1, z: 1}
   m_SwingingPlatform:
@@ -23487,3 +23537,4 @@ SceneRoots:
   - {fileID: 1816393837}
   - {fileID: 2111474820}
   - {fileID: 1563744463}
+  - {fileID: 721639860}

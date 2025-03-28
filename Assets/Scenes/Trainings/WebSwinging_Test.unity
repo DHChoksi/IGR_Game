@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18306622, g: 0.2287434, b: 0.30669293, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -214,6 +214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e16c4a0d1fda49b1a968639019074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &133629524 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4147400472132914538, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 441087506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &162735611 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8943925153218229747, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -544,6 +549,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1535264387}
     m_Modifications:
+    - target: {fileID: 1680501587, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1360852226694409495, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -592,6 +617,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1983740263700833118, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_Drag
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983740263700833118, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2141651114331267770, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_InteractionManager
       value: 
@@ -608,6 +641,14 @@ PrefabInstance:
       propertyPath: m_CrosshairController
       value: 
       objectReference: {fileID: 1950004201}
+    - target: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_Center.y
+      value: -0.58
+      objectReference: {fileID: 0}
     - target: {fileID: 7155061898751346720, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_CurrentDecive
       value: 1
@@ -659,16 +700,6 @@ PrefabInstance:
       addedObject: {fileID: 215678697}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
---- !u!4 &441087507 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7182040467800211659, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-  m_PrefabInstance: {fileID: 441087506}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &441087508 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5247366039670764555, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-  m_PrefabInstance: {fileID: 441087506}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &492232369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4426494977070817794, guid: 25e2b8982bcdabc4f8880bbf8e89d4a5, type: 3}
@@ -701,6 +732,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e16c4a0d1fda49b1a968639019074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &545007153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1517456136089959844, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 441087506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &585364457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,14 +2141,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8b1856124ce254b9fb3b0ae7f9a409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LeftController: {fileID: 441087508}
-  m_RightController: {fileID: 441087507}
+  m_LeftController: {fileID: 133629524}
+  m_RightController: {fileID: 545007153}
   m_LeftCrosshair: {fileID: 111893171}
   m_RightCrosshair: {fileID: 162735611}
   m_LockTargetImage: {fileID: 21300000, guid: 8c89ed5746a4faa48bb97701cc2f2e35, type: 3}
   m_OriginalCrosshair: {fileID: 21300000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   m_EnemyTargetColor: {r: 1, g: 0, b: 0, a: 1}
-  m_GrabbableTargetColor: {r: 0.0020987988, g: 1, b: 0, a: 1}
+  m_GrabbableTargetColor: {r: 0.003921747, g: 1, b: 0, a: 1}
+  m_SwingTargetColor: {r: 0, g: 0.321424, b: 1, a: 1}
   m_OriginalColor: {r: 1, g: 1, b: 1, a: 1}
   m_OriginalScale: {x: 1, y: 1, z: 1}
   m_SwingingPlatform:

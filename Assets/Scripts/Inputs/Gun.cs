@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static Constants.Constants;
 
@@ -53,6 +52,7 @@ public class Gun : MonoBehaviour
         if (m_Bullet != null && m_MuzzleTransform != null)
         {
             GameObject bullet = Instantiate(m_Bullet, m_MuzzleTransform.position, Quaternion.identity);
+            bullet.transform.forward = m_MuzzleTransform.forward;
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
             {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.047032718, g: 0.04139529, b: 0.03271749, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4493,6 +4493,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e16c4a0d1fda49b1a968639019074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1066518478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1066518480}
+  - component: {fileID: 1066518479}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1066518479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066518478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: d01e3a10a5c9faf4b99443b6cd528c0c, type: 2}
+--- !u!4 &1066518480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066518478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.816126, y: 6.3080335, z: 2.9890103}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1077823151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5344679346848559852, guid: d476a42f4cd48e640a58a54ff8f030f1, type: 3}
@@ -6268,6 +6317,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 603283307, guid: 538b48bdea3c9e342b2b6b226379a528, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8201027573478520625, guid: 538b48bdea3c9e342b2b6b226379a528, type: 3}
       propertyPath: m_Name
       value: Blackhole_Core
@@ -6282,7 +6335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8201027573478520629, guid: 538b48bdea3c9e342b2b6b226379a528, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.8
+      value: 1.71
       objectReference: {fileID: 0}
     - target: {fileID: 8201027573478520629, guid: 538b48bdea3c9e342b2b6b226379a528, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8207,6 +8260,7 @@ MonoBehaviour:
   m_OriginalCrosshair: {fileID: 21300000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   m_EnemyTargetColor: {r: 1, g: 0, b: 0, a: 1}
   m_GrabbableTargetColor: {r: 0.0020987988, g: 1, b: 0, a: 1}
+  m_SwingTargetColor: {r: 0, g: 0, b: 0, a: 0}
   m_OriginalColor: {r: 1, g: 1, b: 1, a: 1}
   m_OriginalScale: {x: 1, y: 1, z: 1}
   m_SwingingPlatform:
@@ -18962,3 +19016,4 @@ SceneRoots:
   - {fileID: 1654232120}
   - {fileID: 1674720456}
   - {fileID: 675465952}
+  - {fileID: 1066518480}

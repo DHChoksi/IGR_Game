@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -29,6 +28,9 @@ public class CrosshairController : MonoBehaviour
 
     [SerializeField]
     private Color m_GrabbableTargetColor;
+
+    [SerializeField]
+    private Color m_SwingTargetColor;
 
     [SerializeField]
     private Color m_OriginalColor;
@@ -74,58 +76,75 @@ public class CrosshairController : MonoBehaviour
 
     private void UpdateCrosshair(Transform controller, Image crosshair)
     {
-        DetectRaycast(crosshair, controller.position, controller.forward, m_SwingingPlatform, PLATFORM_DETECT_DISTANCE);
-        DetectRaycast(crosshair, controller.position, controller.forward, m_GrabbableObject, TRASH_DETECT_DISTANCE);
-        DetectRaycast(crosshair, controller.position, controller.forward, m_Enemy, ENEMY_DETECT_DISTANCE);
-        DetectRaycast(crosshair, controller.position, controller.forward, m_Core, CORE_DETECT_DISTANCE);
-        DetectRaycast(crosshair, controller.position, controller.forward, 0, MAX_HIT_DETECT_DISTANCE);
+        if (DetectRaycast(crosshair, controller.position, controller.forward, m_SwingingPlatform, PLATFORM_DETECT_DISTANCE,8))
+            return;
+
+        if (DetectRaycast(crosshair, controller.position, controller.forward, m_GrabbableObject, TRASH_DETECT_DISTANCE,9))
+            return;
+
+        if (DetectRaycast(crosshair, controller.position, controller.forward, m_Enemy, ENEMY_DETECT_DISTANCE,13))
+            return;
+
+        if (DetectRaycast(crosshair, controller.position, controller.forward, m_Core, CORE_DETECT_DISTANCE,10))
+            return;
+
+        ResetTargetWithDelay(crosshair);
+        //Disabled by Lokesh
+        //if (DetectRaycast(crosshair, controller.position, controller.forward, 0, MAX_HIT_DETECT_DISTANCE))
+        //    return;
+
     }
 
-    private void DetectRaycast(Image crosshair, Vector3 startPosition, Vector3 direction, LayerMask layer, float distance)
+    //LOKESH IMPLEMENTATION
+    RaycastHit hit;
+    private bool DetectRaycast(Image crosshair, Vector3 startPosition, Vector3 direction, LayerMask layer, float distance,int type)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(startPosition, direction, out hit, distance, layer))
+        if (Physics.Raycast(startPosition, direction,distance, layer))
         {
-            ChangeCrosshair(crosshair, hit.transform.gameObject.layer); 
+            ChangeCrosshair(crosshair, type);
+            return true;
         }
+        return false;
     }
+
+    //private void DetectRaycast(Image crosshair, Vector3 startPosition, Vector3 direction, LayerMask layer, float distance)
+    //{
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(startPosition, direction, out hit, distance, layer))
+    //    {
+    //        ChangeCrosshair(crosshair, hit.transform.gameObject.layer); 
+    //    }
+    //}
     
     private void ChangeCrosshair(Image crosshair, int layerMask)
     {
-        StartCoroutine(ResetTargetWithDelay(crosshair));
+        ChangeSprite(crosshair);
+        AnimateCrosshair(crosshair);
 
         switch (layerMask)
         {
             case 8: // Grabbable
-                StartCoroutine(ResetTargetWithDelay(crosshair));
-                AnimateCrosshair(crosshair);
                 ChangeColor(crosshair, m_GrabbableTargetColor);
-/*                
-                m_LeftGripActionType = crosshair.gameObject == m_LeftCrosshair ? GripAction.HyperHook : GripAction.None;
-                m_RightGripActionType = crosshair.gameObject == m_RightCrosshair ? GripAction.HyperHook : GripAction.None;*/
+
+                /*m_LeftGripActionType = crosshair.gameObject == m_LeftCrosshair ? GripAction.HyperHook : GripAction.None;
+                m_RightGripActionType = crosshair.gameObject == m_RightCrosshair ? GripAction.HyperHook : GripAction.None;  */
 
                 break;
 
             case 9: // Swinging Platform
-                ChangeSprite(crosshair);
-                AnimateCrosshair(crosshair); 
-                ChangeColor(crosshair, m_OriginalColor);
+                ChangeColor(crosshair, m_SwingTargetColor);
                   
-       /*       m_LeftGripActionType = crosshair.gameObject == m_LeftCrosshair ? GripAction.WebSwinging : GripAction.None;  
+                /*m_LeftGripActionType = crosshair.gameObject == m_LeftCrosshair ? GripAction.WebSwinging : GripAction.None;  
                 m_RightGripActionType = crosshair.gameObject == m_RightCrosshair ? GripAction.WebSwinging : GripAction.None;
                 Debug.Log(m_LeftGripActionType.ToString() + " | " + (crosshair.gameObject == m_LeftCrosshair));  */
 
                 break; 
 
             case 10: // Core 
-                ChangeSprite(crosshair);
-                AnimateCrosshair(crosshair);
                 ChangeColor(crosshair, m_GrabbableTargetColor);
                 break;
 
             case 13: // Enemy 
-                AnimateCrosshair(crosshair);
-                ChangeSprite(crosshair);
                 ChangeColor(crosshair, m_EnemyTargetColor);
                 break;
         }
@@ -133,6 +152,9 @@ public class CrosshairController : MonoBehaviour
 
     private void AnimateCrosshair(Image crosshair)
     {
+        if (DOTween.IsTweening(crosshair.transform))
+            return;
+
         crosshair.transform.DOScale(m_OriginalScale * 1.2f, 0.25f).OnComplete(() =>
         {
             crosshair.transform.DOScale(m_OriginalScale, 0.3f);
@@ -148,15 +170,29 @@ public class CrosshairController : MonoBehaviour
     {
     /*  Debug.Log("Change Color "+color.ToString());*/
         crosshair.color = color;
-    } 
-     
-    private IEnumerator ResetTargetWithDelay(Image crosshair)
+    }
+
+    private void ResetTargetWithDelay(Image crosshair)
     {
-        yield return new WaitForEndOfFrame();
-         
-    /*  Debug.Log("Reset it !!");*/
+        /*  Debug.Log("Reset it !!");*/
         crosshair.sprite = m_OriginalCrosshair;
         crosshair.color = m_OriginalColor;
+        if(DOTween.IsTweening(crosshair.transform))
+        {
+            DOTween.Kill(crosshair.transform);
+        }
+
         crosshair.transform.localScale = m_OriginalScale;
     }
+
+    //Disabled by Lokesh
+    //private IEnumerator ResetTargetWithDelay(Image crosshair)
+    //{
+    //    yield return new WaitForEndOfFrame();
+         
+    ///*  Debug.Log("Reset it !!");*/
+    //    crosshair.sprite = m_OriginalCrosshair;
+    //    crosshair.color = m_OriginalColor;
+    //    crosshair.transform.localScale = m_OriginalScale;
+    //}
 }   
