@@ -78,6 +78,7 @@ public class HyperHook : MonoBehaviour
                 m_GrabbedObject.SetParent(m_GrabingTip);
                 m_GrabbedRigidbody.velocity = Vector3.zero;
                 m_WebLine.enabled = false;
+                Debug.Log("Comming here");
             }
         }
     }

@@ -12,7 +12,7 @@ public class Core : MonoBehaviour
              
             if (trashScript != null)
             {
-                trashScript.AnimateAndDisable(transform.position);
+                trashScript.AnimateAndDisable(this.transform.position);
             }
         }
     }

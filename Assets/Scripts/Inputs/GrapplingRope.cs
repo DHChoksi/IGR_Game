@@ -72,7 +72,7 @@ public class GrapplingRope : MonoBehaviour
         m_Spring.SetDamper(m_Damper);
 
         Vector3 grapplePoint = m_WebShooter._CurrentGrapplePosition;
-        Vector3 gunTip = m_WebShooter._GunTip.position; 
+        Vector3 gunTip = m_WebShooter._GunTip.position;     
         Vector3 quaternion = Quaternion.LookRotation((grapplePoint - gunTip).normalized) * Vector3.up;
 
         m_CurrentGrapplePosition = Vector3.Lerp(m_CurrentGrapplePosition, grapplePoint, Time.deltaTime * 12f);

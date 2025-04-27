@@ -97,13 +97,11 @@ public class WebShooter : MonoBehaviour
     
         if (controlState == ControlState.Pressed)// && m_CurrentGripAction == GripAction.WebSwinging)
         {
-            Debug.Log("Pressed : " + m_CurrentDevice.ToString());
             StartSwing();
         }
         
         if (controlState == ControlState.NotPressed) 
         {
-            Debug.Log("NotPressed : "+m_CurrentDevice.ToString());
             StopSwing();
         }
     }
