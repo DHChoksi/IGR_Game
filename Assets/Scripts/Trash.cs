@@ -92,14 +92,14 @@ public class Trash : MonoBehaviour
         transform.DOScale(transform.localScale * 1.02f, 0.5f)
             .OnComplete(() =>
             {
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(Disable);
+                Disable();
             });
     }
 
     private void Disable()
     {
         gameObject.SetActive(false);
-    }
+    } 
 
     private void TrackPlayerDistance()
     {
@@ -163,14 +163,14 @@ public class Trash : MonoBehaviour
 
         EnableRadiationEffect(1f);
 
-        if (m_TrashType == TrashType.Explosive)
+       /* if (m_TrashType == TrashType.Explosive)
         {
             ExplodeTrash();
         }
         else
         {
             Disable();
-        }
+        }*/
     }
 
     private void ExplodeTrash()

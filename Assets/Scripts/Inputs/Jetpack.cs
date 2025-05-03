@@ -31,12 +31,15 @@ public class Jetpack : MonoBehaviour
     private void OnEnable()
     {
         InputEvents.GripActionInputs += OnGrip;
+        InputEvents.SetJetpackInput += OnJetpackOverride;
     }
 
     private void OnDisable()
     {
         InputEvents.GripActionInputs -= OnGrip;
+        InputEvents.SetJetpackInput -= OnJetpackOverride;
     }
+
 
     private void FixedUpdate()
     {
@@ -77,4 +80,17 @@ public class Jetpack : MonoBehaviour
             m_RightGripInput = gripValue;
         }
     }
+
+    private void OnJetpackOverride(LR_Device device, float gripValue)
+    {
+        if (device == LR_Device.L_Device)
+        {
+            m_LeftGripInput = gripValue;
+        }
+        else if (device == LR_Device.R_Device)
+        {
+            m_RightGripInput = gripValue;
+        }
+    }
+
 }

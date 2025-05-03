@@ -53,7 +53,7 @@ public class WebShooter : MonoBehaviour
     private void StartSwing()
     {
         RaycastHit raycastHit;
-        if (Physics.Raycast(m_GunTip.position, m_GunTip.forward, out raycastHit, PLATFORM_DETECT_DISTANCE, m_LayerMask))
+        if (Physics.Raycast(m_GunTip.position, m_GunTip.forward, out raycastHit, Mathf.Infinity, m_LayerMask))
         {
             m_SwingPoint = raycastHit.point;
             m_SpringJoint = m_Player.AddComponent<SpringJoint>();

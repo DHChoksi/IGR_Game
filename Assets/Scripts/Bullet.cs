@@ -2,17 +2,25 @@ using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
-{ 
+{
+    [SerializeField] private float destroyDelay = 8f;
+
     void Start()
     {
-        StartCoroutine(SelfDestroy(8f));
+        StartCoroutine(SelfDestroy(destroyDelay));
     }
-   
+
     private void OnCollisionEnter(Collision collision)
-    { 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))  
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            StartCoroutine(SelfDestroy(0.1f)); 
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null) 
+            {
+                enemy.TakeDamage();
+            }
+
+            Destroy(gameObject, 0.05f); // fast cleanup
         }
     }
 

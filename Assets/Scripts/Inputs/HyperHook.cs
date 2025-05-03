@@ -72,7 +72,7 @@ public class HyperHook : MonoBehaviour
                 m_GrabbedRigidbody.velocity = direction * m_GrabingSpeed;
             }
 
-            if (distance < 1f)
+            if (distance < 2f)
             {
                 Vector3 ObjectPosition = m_GrabingTip.transform.position;  
                 m_GrabbedObject.SetParent(m_GrabingTip);
@@ -106,23 +106,26 @@ public class HyperHook : MonoBehaviour
 
     private void TryGrabObject()
     {
-        if (m_GrabbedObject != null) 
-            return; 
+        if (m_GrabbedObject != null)
+            return;
 
         RaycastHit hit;
-        if (Physics.Raycast(m_GrabingTip.position, m_GrabingTip.forward, out hit, TRASH_DETECT_DISTANCE, m_GrabbableLayer))
+        if (Physics.Raycast(m_GrabingTip.position, m_GrabingTip.forward, out hit, Mathf.Infinity, m_GrabbableLayer))
         {
             m_GrabbedObject = hit.transform;
             m_GrabbedRigidbody = m_GrabbedObject.GetComponent<Rigidbody>();
 
             if (m_GrabbedRigidbody != null)
             {
-                m_GrabbedRigidbody.drag = 2f; 
+                m_GrabbedRigidbody.drag = 2f;
             }
 
-            m_WebLine.enabled = true; 
+            m_WebLine.enabled = true;
+
+            // Disable Jetpack for current device
+            InputEvents.RaiseSetJetpackInput(m_CurrentDevice, 0f);
         }
-    } 
+    }
 
     private void ReleaseObject()
     {

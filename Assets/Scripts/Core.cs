@@ -12,7 +12,8 @@ public class Core : MonoBehaviour
              
             if (trashScript != null)
             {
-                trashScript.AnimateAndDisable(this.transform.position);
+                ScoreManager.Instance?.OnTrashThrown(trashScript);  
+                trashScript.AnimateAndDisable(Vector3.zero);
             }
         }
     }

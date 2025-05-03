@@ -99,12 +99,11 @@ public class CrosshairController : MonoBehaviour
     RaycastHit hit;
     private bool DetectRaycast(Image crosshair, Vector3 startPosition, Vector3 direction, LayerMask layer, float distance,int type)
     {
-        bool hitDetected = Physics.Raycast(startPosition, direction, out hit, distance, layer);
+        bool hitDetected = Physics.Raycast(startPosition, direction, out hit, Mathf.Infinity, layer);
 
         // Draw the ray - green if hit, red if not
         Color rayColor = hitDetected ? Color.green : Color.red;
-        float rayLength = hitDetected ? hit.distance : distance;
-        Debug.DrawRay(startPosition, direction * rayLength, rayColor, 0.1f); // duration is one frame (good for Update)
+        Debug.DrawRay(startPosition, direction * (hitDetected ? hit.distance : Mathf.Infinity), rayColor, 0.1f); // duration is one frame (good for Update)
 
         if (hitDetected)
         {

@@ -94,10 +94,18 @@ namespace Constants
             HyperHook
         }
 
-        public static float MAX_HIT_DETECT_DISTANCE = 100000f;
-        public static float TRASH_DETECT_DISTANCE = 100000f;
-        public static float ENEMY_DETECT_DISTANCE = 100000f; 
-        public static float PLATFORM_DETECT_DISTANCE = 100000f;
+        public enum DrownState
+        {
+            Move, 
+            PlayerDetected, 
+            Attack, 
+            Death 
+        }
+
+        public static float MAX_HIT_DETECT_DISTANCE = 1000000f;
+        public static float TRASH_DETECT_DISTANCE = 1000000f;
+        public static float ENEMY_DETECT_DISTANCE = 1000000f; 
+        public static float PLATFORM_DETECT_DISTANCE = 1000000f;
         public static float CORE_DETECT_DISTANCE = 100000f;
     }
 }

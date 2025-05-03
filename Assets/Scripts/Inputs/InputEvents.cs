@@ -1,3 +1,4 @@
+using System;
 using static Constants.Constants;
 
 public static class InputEvents
@@ -11,7 +12,9 @@ public static class InputEvents
     /*public static event ActionButtonEvent ButtonInputs;*/ 
     public static event ActionTrigger TriggerActionInputs; 
     public static event ActionGrip GripActionInputs;
-/*    public static event ActionTouchpadEvent PrimaryTouchpadInput;*/
+    /*    public static event ActionTouchpadEvent PrimaryTouchpadInput;*/
+
+    public static event Action<LR_Device, float> SetJetpackInput;
 
     public static void TriggerInput(LR_Device lr_Device, ControlType controlType, ControlState controlState)
     {
@@ -23,9 +26,14 @@ public static class InputEvents
         GripActionInputs?.Invoke(lr_Device, controlType, controlState, gripValue);
     }
 
-   /* public static void TriggerPrimaryTouchpadInput(InputDevice inputDevice, InputFeatureUsage<Vector2> inputFeatureUsage, Vector2 vectorValue, LR_Device lr_Device, ControlType controlType)
+    public static void RaiseSetJetpackInput(LR_Device device, float value)
     {
-        PrimaryTouchpadInput?.Invoke(inputDevice, inputFeatureUsage, vectorValue, lr_Device, controlType);
-    }*/
+        SetJetpackInput?.Invoke(device, value);
+    }
+
+    /* public static void TriggerPrimaryTouchpadInput(InputDevice inputDevice, InputFeatureUsage<Vector2> inputFeatureUsage, Vector2 vectorValue, LR_Device lr_Device, ControlType controlType)
+     {
+         PrimaryTouchpadInput?.Invoke(inputDevice, inputFeatureUsage, vectorValue, lr_Device, controlType);
+     }*/
 }
    
