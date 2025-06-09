@@ -47,8 +47,6 @@ namespace Unity.VRTemplate
         long m_LastFrameBeforeScrub;
         VideoPlayer m_VideoPlayer;
 
-        [SerializeField]
-        private SceneChanger m_SceneChanger;
 
         void Start()
         {
@@ -202,15 +200,8 @@ namespace Unity.VRTemplate
 
         void PlayClip(bool capPlay)
         {
-            StartCoroutine(SceneTransition((float)m_VideoPlayer.clip.length));
             VideoPlay();
         }
 
-        IEnumerator SceneTransition(float time)
-        {
-            time += 0.5f;
-            yield return new WaitForSeconds(time);
-            m_SceneChanger.LoadTargetScene();
-        }
     }
 }

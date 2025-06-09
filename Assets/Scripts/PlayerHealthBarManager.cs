@@ -3,36 +3,42 @@ using UnityEngine.UI;
 
 public class PlayerHealthBarManager : MonoBehaviour
 {
-    public Slider healthSlider;
-    public float maxHealth = 1f;
-    private float currentHealth;
+    [SerializeField]
+    private Slider m_HealthSlider;
 
+    [SerializeField]
+    private float m_MaxHealth = 1f;
+
+    private float m_CurrentHealth;
+    
+    
     private void Start()
     {
-        currentHealth = maxHealth;
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currentHealth;
+        m_CurrentHealth = m_MaxHealth;
+        m_HealthSlider.maxValue = m_MaxHealth;
+        m_HealthSlider.value = m_CurrentHealth;
     }
 
     private void OnTriggerEnter(Collider other)
     {  
         if (other.gameObject.layer == LayerMask.NameToLayer("EnemyMissile"))
         {
-            TakeDamage(0.2f);
+            TakeDamage(0.1f);
         }
     }
 
     public void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthSlider.value = currentHealth;
+        m_CurrentHealth -= amount;
+        m_CurrentHealth = Mathf.Clamp(m_CurrentHealth, 0, m_MaxHealth);
+        m_HealthSlider.value = m_CurrentHealth;
 
         HurtEffect.Instance?.PlayHurtEffect();
 
-        if (currentHealth <= 0)
+        if (m_CurrentHealth <= 0)
         {
-            WinLoseManager.Instance?.ShowResult(false);
+            Debug.Log("Lose------");
+            GeneralEvents.OnGameResult?.Invoke(false);
         }
     }
 }

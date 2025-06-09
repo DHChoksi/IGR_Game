@@ -1,6 +1,6 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class HurtEffect : MonoBehaviour
 {
@@ -24,45 +24,27 @@ public class HurtEffect : MonoBehaviour
         }
         Instance = this;
     }
-    //PlayerHurtEffect.Instance.PlayHurtEffect();   
+
+    // Call this from anywhere using: HurtEffect.Instance.PlayHurtEffect();
     public void PlayHurtEffect()
     {
-        StopAllCoroutines();
-        StartCoroutine(HurtSequence());
-    }
+        Debug.Log("Play Hurt Effect");
 
-    private IEnumerator HurtSequence()
-    {
-        float timer = 0f;
+        // Kill any ongoing tweens on the images
+        redFlashImage.DOKill();
+        vignetteImage.DOKill();
 
-        // Fade in
-        while (timer < fadeDuration)
-        {
-            timer += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, timer / fadeDuration);
-
-            SetAlpha(redFlashImage, alpha * maxRedAlpha);
-            SetAlpha(vignetteImage, alpha * maxVignetteAlpha);
-            yield return null;
-        }
-
-        // Hold for a split second
-        yield return new WaitForSeconds(0.1f);
-
-        // Fade out
-        timer = 0f;
-        while (timer < fadeDuration)
-        {
-            timer += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, timer / fadeDuration);
-
-            SetAlpha(redFlashImage, alpha * maxRedAlpha);
-            SetAlpha(vignetteImage, alpha * maxVignetteAlpha);
-            yield return null;
-        }
-
+        // Reset alpha to 0 instantly
         SetAlpha(redFlashImage, 0f);
         SetAlpha(vignetteImage, 0f);
+
+        // Fade in both images
+        redFlashImage.DOFade(maxRedAlpha, fadeDuration);
+        vignetteImage.DOFade(maxVignetteAlpha, fadeDuration);
+
+        // Then fade out after short delay
+        redFlashImage.DOFade(0f, fadeDuration).SetDelay(fadeDuration + 0.1f);
+        vignetteImage.DOFade(0f, fadeDuration).SetDelay(fadeDuration + 0.1f);
     }
 
     private void SetAlpha(Image img, float alpha)

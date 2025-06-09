@@ -9,8 +9,6 @@ public class ButtonInteraction : MonoBehaviour
     public Button uiButton;                // Reference to the UI Button
     private bool isHovering = false;        // To track if the button is being pointed at
 
-    [SerializeField]
-    private SceneChanger m_SceneChanger;
     void Start()
     {
         // Add listener for button interaction
@@ -55,7 +53,6 @@ public class ButtonInteraction : MonoBehaviour
     private void OnButtonClicked()
     {
         Debug.Log("Button Clicked in VR!");
-        m_SceneChanger.LoadTargetScene();
     }
 
     // Called when the ray starts hovering over the button

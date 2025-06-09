@@ -421,7 +421,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2.5
+  m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -763,7 +763,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6883142700348779667}
@@ -812,15 +812,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97d86546a905024187faa394c64fe11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
+  m_CurrentState: 0
   m_PlayerDetectRadius: 150
-  attackRange: 150
-  attackCooldown: 2
-  maxHealth: 1
-  missilePrefab: {fileID: 7138465295510604907, guid: 19a2cf87cadda4d46b2be35fbbfe5dc2, type: 3}
-  missileSpawnPoint: {fileID: 6804468110877464498}
-  blastEffectPrefab: {fileID: 1620140131458704099, guid: 57e5b83dfee152a47aedf7d83c83e9f5, type: 3}
-  healthSlider: {fileID: 1035685360398177343}
+  m_AttackRange: 6
+  m_AttackCooldown: 2
+  m_MaxHealth: 2
+  m_MissilePrefab: {fileID: 7138465295510604907, guid: 19a2cf87cadda4d46b2be35fbbfe5dc2, type: 3}
+  m_MissileSpawnPoint: {fileID: 6804468110877464498}
+  m_BlastEffectPrefab: {fileID: 1620140131458704099, guid: 57e5b83dfee152a47aedf7d83c83e9f5, type: 3}
+  m_HealthSlider: {fileID: 1035685360398177343}
+  m_MissileSpeed: 600
 --- !u!1 &5487719655583250625
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,7 +896,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2.5
+  m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -1589,7 +1590,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2.5
+  m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3

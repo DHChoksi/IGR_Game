@@ -20,9 +20,9 @@ public class ControllerInputs : MonoBehaviour
 
         controls.LeftHandControls.LeftTrigger.performed += ctx => OnLeftTriggerPressed();
         controls.LeftHandControls.LeftTrigger.canceled += ctx => OnLeftTriggerReleased();
-
+/*
         controls.LeftHandControls.LeftPrimaryButton.performed += ctx => OnLeftPrimaryButtonPressed();
-        controls.LeftHandControls.LeftPrimaryButton.canceled += ctx => OnLeftPrimaryButtonReleased();
+        controls.LeftHandControls.LeftPrimaryButton.canceled += ctx => OnLeftPrimaryButtonReleased();*/
 
         // Assign callbacks for Right Hand
         controls.RightHandControls.RightGrip.performed += ctx => OnRightGripPressed(ctx.ReadValue<float>());
@@ -30,9 +30,9 @@ public class ControllerInputs : MonoBehaviour
 
         controls.RightHandControls.RightTrigger.performed += ctx => OnRightTriggerPressed();
         controls.RightHandControls.RightTrigger.canceled += ctx => OnRightTriggerReleased();
-
+/*
         controls.RightHandControls.RightPrimaryButton.performed += ctx => OnRightPrimaryButtonPressed();
-        controls.RightHandControls.RightPrimaryButton.canceled += ctx => OnRightPrimaryButtonReleased();
+        controls.RightHandControls.RightPrimaryButton.canceled += ctx => OnRightPrimaryButtonReleased();*/
     }
 
     private void OnEnable()
@@ -56,8 +56,8 @@ public class ControllerInputs : MonoBehaviour
     private void OnLeftTriggerPressed() => InputEvents.TriggerInput(LR_Device.L_Device, ControlType.Trigger, ControlState.Pressed);
     private void OnLeftTriggerReleased() => InputEvents.TriggerInput(LR_Device.L_Device, ControlType.Trigger, ControlState.NotPressed);
 
-    private void OnLeftPrimaryButtonPressed() => Debug.Log("Left Primary Button Pressed");
-    private void OnLeftPrimaryButtonReleased() => Debug.Log("Left Primary Button Released"); 
+   /* private void OnLeftPrimaryButtonPressed() => Debug.Log("Left Primary Button Pressed");
+    private void OnLeftPrimaryButtonReleased() => Debug.Log("Left Primary Button Released"); */
 
     // Right Hand Callbacks
     private void OnRightGripPressed(float value) => InputEvents.GripInput(LR_Device.R_Device, ControlType.Grip, ControlState.Pressed, value);
@@ -65,7 +65,7 @@ public class ControllerInputs : MonoBehaviour
 
     private void OnRightTriggerPressed() => InputEvents.TriggerInput(LR_Device.R_Device, ControlType.Trigger, ControlState.Pressed);
     private void OnRightTriggerReleased() => InputEvents.TriggerInput(LR_Device.R_Device, ControlType.Trigger, ControlState.NotPressed);
-
+/*
     private void OnRightPrimaryButtonPressed() => Debug.Log("Right Primary Button Pressed");
-    private void OnRightPrimaryButtonReleased() => Debug.Log("Right Primary Button Released");
+    private void OnRightPrimaryButtonReleased() => Debug.Log("Right Primary Button Released");*/
 }

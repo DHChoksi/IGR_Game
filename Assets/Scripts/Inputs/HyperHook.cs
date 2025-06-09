@@ -76,9 +76,9 @@ public class HyperHook : MonoBehaviour
             {
                 Vector3 ObjectPosition = m_GrabingTip.transform.position;  
                 m_GrabbedObject.SetParent(m_GrabingTip);
+                m_GrabbedObject.GetComponent<MeshRenderer>().enabled = false;
                 m_GrabbedRigidbody.velocity = Vector3.zero;
                 m_WebLine.enabled = false;
-                Debug.Log("Comming here");
             }
         }
     }
@@ -121,7 +121,6 @@ public class HyperHook : MonoBehaviour
             }
 
             m_WebLine.enabled = true;
-
             // Disable Jetpack for current device
             InputEvents.RaiseSetJetpackInput(m_CurrentDevice, 0f);
         }
@@ -141,8 +140,9 @@ public class HyperHook : MonoBehaviour
                 float shootForce = m_GrabingSpeed * 2f;         
 
                 m_GrabbedRigidbody.velocity = shootDirection * shootForce;
+                m_GrabbedObject.GetComponent<MeshRenderer>().enabled = true;
             }
-            
+
             m_GrabbedObject = null;
             m_GrabbedRigidbody = null;
         }

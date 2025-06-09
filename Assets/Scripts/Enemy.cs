@@ -1,121 +1,135 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum DrownState { Move, PlayerDetected, Attack, Death }
+using static Constants.Constants;
 
 public class Enemy : MonoBehaviour
 {
-    public DrownState currentState = DrownState.Move;
+    [SerializeField] 
+    private DrownState m_CurrentState = DrownState.Move;
 
     [Header("Combat")]
-    public float m_PlayerDetectRadius = 10f;
-    public float attackRange = 6f;
-    public float attackCooldown = 2f;
-    public float maxHealth = 2;
-    public GameObject missilePrefab;
-    public Transform missileSpawnPoint;
-    public GameObject blastEffectPrefab;
+    [SerializeField] 
+    private float m_PlayerDetectRadius = 10f;
+    
+    [SerializeField]
+    private float m_AttackRange = 6f;
+    
+    [SerializeField]
+    private float m_AttackCooldown = 2f;
+   
+    [SerializeField] 
+    private float m_MaxHealth = 2;
+    
+    [SerializeField]
+    private GameObject m_MissilePrefab;
+   
+    [SerializeField] 
+    private Transform m_MissileSpawnPoint;
+   
+    [SerializeField] 
+    private GameObject m_BlastEffectPrefab;
+
+    [SerializeField]
+    private float m_MissileSpeed = 550f;
 
     [Header("UI")]
-    public Slider healthSlider;
+    public Slider m_HealthSlider;
 
-    private float health;
-    private float attackTimer;
 
-    private Transform playerHead;
-    private Transform clusterCenter;
-    private Vector3 localOffset;
+    private float m_Health;
+    private float m_AttackTimer;
 
-    private Transform[] rocketTips;
+    private Transform m_PlayerHead;
+    private Transform m_ClusterCenter;
+    private Vector3 m_LocalOffset;
+
+    private Transform[] m_RocketTips;
 
     public void SetPlayerHead(Transform head)
     {
-        playerHead = head;
+        m_PlayerHead = head;
 
         // Optional: Automatically find rocket tips
-        rocketTips = new Transform[3];
-        rocketTips[0] = GameObject.Find("RocketTip1")?.transform;
-        rocketTips[1] = GameObject.Find("RocketTip2")?.transform;
-        rocketTips[2] = GameObject.Find("RocketTip3")?.transform;
+        m_RocketTips = new Transform[3];
+        m_RocketTips[0] = GameObject.Find("RocketTip1")?.transform;
+        m_RocketTips[1] = GameObject.Find("RocketTip2")?.transform;
+        m_RocketTips[2] = GameObject.Find("RocketTip3")?.transform;
     }
 
     public void SetClusterParent(Transform parent, Vector3 offset)
     {
-        clusterCenter = parent;
-        localOffset = offset;
+        m_ClusterCenter = parent;
+        m_LocalOffset = offset;
     }
 
     private void Start()
     {
-        health = maxHealth;
-        if (healthSlider != null)
+        m_Health = m_MaxHealth;
+        if (m_HealthSlider != null)
         {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = health;
+            m_HealthSlider.maxValue = m_MaxHealth;
+            m_HealthSlider.value = m_Health;
         }
     }
-
     private void Update()
     {
-        if (currentState == DrownState.Death || playerHead == null)
+        if (m_CurrentState == DrownState.Death || m_PlayerHead == null)
             return;
 
-        float distToPlayer = Vector3.Distance(transform.position, playerHead.position);
+        float distToPlayer = Vector3.Distance(transform.position, m_PlayerHead.position);
 
-        switch (currentState)
+        switch (m_CurrentState)
         {
             case DrownState.Move:
-                if (clusterCenter != null)
+                if (m_ClusterCenter != null)
                 {
-                    LookAt(clusterCenter.position + clusterCenter.forward * 10f); // Look ahead
+                    LookAt(m_ClusterCenter.position + m_ClusterCenter.forward * 10f); // Look ahead
                 }
                  
                 if (distToPlayer <= m_PlayerDetectRadius)
-                    currentState = DrownState.PlayerDetected;
+                    m_CurrentState = DrownState.PlayerDetected;
                 break;
 
 
             case DrownState.PlayerDetected:
-                LookAt(playerHead.position);
-                MaintainClusterOffset();
+                LookAt(m_PlayerHead.position);
 
-                if (distToPlayer <= attackRange)
+                if (distToPlayer <= m_AttackRange)
                 {
-                    Debug.Log("Attack !!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                    currentState = DrownState.Attack;
-                    attackTimer = attackCooldown;
+                    m_CurrentState = DrownState.Attack;
+                    m_AttackTimer = m_AttackCooldown;
                 }
                 break;
 
             case DrownState.Attack:
-                LookAt(playerHead.position);
-                attackTimer -= Time.deltaTime;
+                LookAt(m_PlayerHead.position);
+                m_AttackTimer -= Time.deltaTime;
 
-                if (attackTimer <= 0f)
+                if (m_AttackTimer <= 0f)
                 {
                     FireMissile();
-                    attackTimer = attackCooldown;
+                    m_AttackTimer = m_AttackCooldown;
                 }
 
-                if (distToPlayer > attackRange)
-                    currentState = DrownState.PlayerDetected;
+                if (distToPlayer > m_AttackRange)
+                    m_CurrentState = DrownState.PlayerDetected;
                 break;
         }
     }
 
     private void MaintainClusterOffset()
     {
-        if (clusterCenter == null) return;
+        if (m_ClusterCenter == null) return;
 
-        Vector3 targetPosition = clusterCenter.TransformPoint(localOffset);
+        Vector3 targetPosition = m_ClusterCenter.TransformPoint(m_LocalOffset);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 2f);
-        LookAt(clusterCenter.position + clusterCenter.forward * 10f);
+        LookAt(m_ClusterCenter.position + m_ClusterCenter.forward * 10f);
     }
 
     private void LookAt(Vector3 target)
     {
         Vector3 dir = (target - transform.position).normalized;
-        dir.y = 0;
         if (dir.magnitude > 0.01f)
         {
             Quaternion lookRot = Quaternion.LookRotation(dir);
@@ -125,19 +139,19 @@ public class Enemy : MonoBehaviour
 
     private void FireMissile()
     {
-        if (missilePrefab == null || missileSpawnPoint == null || playerHead == null) 
+        if (m_MissilePrefab == null || m_MissileSpawnPoint == null || m_PlayerHead == null) 
             return;
 
-        GameObject missile = Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
+        GameObject missile = Instantiate(m_MissilePrefab, m_MissileSpawnPoint.position, Quaternion.identity);
 
-        Vector3 direction = (playerHead.position - missileSpawnPoint.position).normalized;
+        Vector3 direction = (m_PlayerHead.position - m_MissileSpawnPoint.position).normalized;
         missile.transform.rotation = Quaternion.LookRotation(direction);
          
         Rigidbody rb = missile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            float missileSpeed = 300f; // Adjust as needed
-            rb.velocity = direction * missileSpeed;
+            // Adjust as needed
+            rb.velocity = direction * m_MissileSpeed;
             rb.useGravity = false;   // Optional: depends on your missile type
         }
 
@@ -146,25 +160,25 @@ public class Enemy : MonoBehaviour
 
     public void SetClusterParent(Transform parent)
     {
-        clusterCenter = parent;
+        m_ClusterCenter = parent;
     }
 
     public void TakeDamage()
     {
-        health = health - 0.5f;
-        if (healthSlider != null) healthSlider.value = health;
+        m_Health = m_Health - 0.5f;
+        if (m_HealthSlider != null) m_HealthSlider.value = m_Health;
 
-        if (health <= 0)
+        if (m_Health <= 0)
             Die();
     }
 
     private void Die()
     {
-        currentState = DrownState.Death;
+        m_CurrentState = DrownState.Death;
          
-        if (blastEffectPrefab != null)
+        if (m_BlastEffectPrefab != null)
         {
-            GameObject fx = Instantiate(blastEffectPrefab, transform.position, Quaternion.identity);
+            GameObject fx = Instantiate(m_BlastEffectPrefab, transform.position, Quaternion.identity);
             Destroy(fx, 2f);
         }
 

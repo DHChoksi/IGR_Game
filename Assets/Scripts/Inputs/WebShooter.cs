@@ -87,15 +87,12 @@ public class WebShooter : MonoBehaviour
      
     void OnGrip(LR_Device lr_Device, ControlType controlType, ControlState controlState, float gripValue)
     {
-        //m_GripActionType != GripManager._CurrentGripAction || m_CurrentDecive != GripManager._CurrentLRDevice ||
         if (m_CurrentDevice != lr_Device) 
         {
             return;
         }
 
-       // Debug.Log("Web Swinging " + m_GripActionType.ToString());// + " | " + GripManager._CurrentGripAction.ToString());
-    
-        if (controlState == ControlState.Pressed)// && m_CurrentGripAction == GripAction.WebSwinging)
+        if (controlState == ControlState.Pressed)
         {
             StartSwing();
         }

@@ -1,19 +1,47 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using static Constants.Constants;
 
 public class WinLoseManager : MonoBehaviour
 {
-    public static WinLoseManager Instance;
-    public GameObject resultPanel;         // The UI panel (enable/disable it)
-    public TextMeshProUGUI resultText;     // Reference to the TextMeshPro component
-    public void ShowResult(bool isWin)
-    { 
-        resultPanel.SetActive(true);  // Show the panel
-        resultText.text = isWin ? "You Win!" : "You Lose!";
+    public GameObject m_ResultPanel;
+    public TextMeshProUGUI m_ResultText;
+    private int m_CurrentLevel = 0;
+
+    private void OnEnable()
+    {
+        GeneralEvents.OnGameResult += ShowResult;
     }
+
+    private void OnDisable()
+    {
+        GeneralEvents.OnGameResult -= ShowResult;
+    }
+
+    public void ShowResult(bool isWin)
+    {
+        m_ResultPanel.SetActive(true);
+        m_ResultText.text = isWin ? "You Win!" : "You Lose!";
+        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        int nextLevel = currentLevel == 1 ? 2 : 1;
+        m_CurrentLevel = nextLevel;
+        PlayerPrefs.SetInt("CurrentLevel", nextLevel);
+        PlayerPrefs.Save();
+        StartCoroutine(DelayedSceneChange());
+    }
+
+    private IEnumerator DelayedSceneChange()
+    {
+        yield return new WaitForSecondsRealtime(1f); // Wait 1 second (real time, not affected by timeScale)
+        Time.timeScale = 1f;
+        SceneName sceneName = m_CurrentLevel == 1 ? SceneName.Instruction : SceneName.StoryBoard;
+        GeneralEvents.OnSceneChangeRequest?.Invoke(sceneName);
+      
+    } 
 
     public void HideResult()
     {
-        resultPanel.SetActive(false); // Optional: hide panel if needed
+        m_ResultPanel.SetActive(false);
     }
 }

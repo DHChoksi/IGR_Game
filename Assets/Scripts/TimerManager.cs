@@ -4,7 +4,7 @@ using TMPro;
 public class TimerManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    public float startTime = 300f; // 5 minutes
+    public float startTime = 210f; 
     private float timeRemaining;
     private bool timerRunning = true;
 
@@ -23,13 +23,11 @@ public class TimerManager : MonoBehaviour
         {
             timeRemaining = 0f;
             timerRunning = false;
-            WinLoseManager.Instance?.ShowResult(false);
+            GeneralEvents.OnGameResult?.Invoke(false);
         }
 
         int minutes = Mathf.FloorToInt(timeRemaining / 60);
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
         timerText.text = $"{minutes:00}:{seconds:00}";
     }
-
-    public void StopTimer() => timerRunning = false;
 }

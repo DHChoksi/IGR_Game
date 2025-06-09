@@ -5,16 +5,16 @@ using UnityEngine;
 public class EnemyClusterManager : MonoBehaviour
 {
     [Header("Waypoints Path")]
-    [SerializeField] private Transform[] clusterWaypoints;
+    [SerializeField] private Transform[] m_ClusterWaypoints;
 
     [Header("Enemy Group Root")]
-    [SerializeField] private Transform enemyClusterRoot;  // Parent of all Drowns
+    [SerializeField] private Transform m_EnemyClusterRoot;  // Parent of all Drowns
 
     [Header("Player Reference")]
-    [SerializeField] private Transform playerHead;
+    [SerializeField] private Transform m_PlayerHead;
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 1.5f;
+    [SerializeField] private float m_MoveSpeed = 1.5f;
     [SerializeField] private float rotateSpeed = 2f;
     [SerializeField] private float waypointThreshold = 0.5f;
 
@@ -23,56 +23,56 @@ public class EnemyClusterManager : MonoBehaviour
 
     private void Start() 
     {
-        playerHead = GameObject.FindGameObjectWithTag("Player").transform;
-        if (clusterWaypoints.Length == 0 || enemyClusterRoot == null)
+        m_PlayerHead = GameObject.FindGameObjectWithTag("Player").transform;
+        if (m_ClusterWaypoints.Length == 0 || m_EnemyClusterRoot == null)
         {
             Debug.LogError("Missing waypoints or enemyClusterRoot reference.");
             return;
         }
 
-        enemyClusterRoot.position = clusterWaypoints[0].position;
-        currentWaypoint = clusterWaypoints[0];
+        m_EnemyClusterRoot.position = m_ClusterWaypoints[0].position;
+        currentWaypoint = m_ClusterWaypoints[0];
 
         // Assign playerHead and clusterCenter to all children
-        foreach (Transform child in enemyClusterRoot)
+        foreach (Transform child in m_EnemyClusterRoot)
         {
             var ai = child.GetComponent<Enemy>();
             if (ai != null)
             {
-                ai.SetPlayerHead(playerHead);
-                ai.SetClusterParent(enemyClusterRoot);
+                ai.SetPlayerHead(m_PlayerHead);
+                ai.SetClusterParent(m_EnemyClusterRoot);
             }
         }
     }
 
     private void Update()
     {
-        if (clusterWaypoints.Length == 0 || enemyClusterRoot == null) return;
+        if (m_ClusterWaypoints.Length == 0 || m_EnemyClusterRoot == null) return;
 
         // Move the entire cluster root
-        enemyClusterRoot.position = Vector3.MoveTowards(
-            enemyClusterRoot.position,
+        m_EnemyClusterRoot.position = Vector3.MoveTowards(
+            m_EnemyClusterRoot.position,
             currentWaypoint.position,
-            moveSpeed * Time.deltaTime
+            m_MoveSpeed * Time.deltaTime
         );
 
         // Rotate the cluster to face the waypoint
-        Vector3 dir = currentWaypoint.position - enemyClusterRoot.position;
+        Vector3 dir = currentWaypoint.position - m_EnemyClusterRoot.position;
         if (dir.sqrMagnitude > 0.1f)
         {
             Quaternion lookRot = Quaternion.LookRotation(dir);
-            enemyClusterRoot.rotation = Quaternion.Slerp(
-                enemyClusterRoot.rotation,
+            m_EnemyClusterRoot.rotation = Quaternion.Slerp(
+                m_EnemyClusterRoot.rotation,
                 lookRot,
                 rotateSpeed * Time.deltaTime
             );
         }
 
         // Next waypoint logic
-        if (Vector3.Distance(enemyClusterRoot.position, currentWaypoint.position) < waypointThreshold)
+        if (Vector3.Distance(m_EnemyClusterRoot.position, currentWaypoint.position) < waypointThreshold)
         {
-            waypointIndex = (waypointIndex + 1) % clusterWaypoints.Length;
-            currentWaypoint = clusterWaypoints[waypointIndex];
+            waypointIndex = (waypointIndex + 1) % m_ClusterWaypoints.Length;
+            currentWaypoint = m_ClusterWaypoints[waypointIndex];
         }
     }
 }

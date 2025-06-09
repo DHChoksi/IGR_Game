@@ -37,6 +37,7 @@ public class Introduction : MonoBehaviour
     private void Start()
     {
         StartCoroutine(WaitTimer());
+        m_KaaraTextMeshPro.text = "Check the controls on your left, then press 'Start Mission' on your right when you're ready!";
     }
 
     IEnumerator WaitTimer()
@@ -63,6 +64,8 @@ public class Introduction : MonoBehaviour
             if (i == m_Dialoges.Count - 1)
                 PlayClip?.Invoke(true);
         }
+
+        m_KaaraTextMeshPro.text = "Check the controls on your left, then press 'Start Mission' on your right when you're ready!";
     }
 
     

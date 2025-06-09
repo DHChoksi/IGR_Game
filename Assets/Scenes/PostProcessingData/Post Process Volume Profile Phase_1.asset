@@ -21,13 +21,13 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.25
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.583
+    m_Value: 1
   rounded:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-3840857081971277975
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -46,19 +46,19 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.54
+    m_Value: 0.64
   intensity:
     m_OverrideState: 1
-    m_Value: 4.2
+    m_Value: 0.3
   scatter:
-    m_OverrideState: 1
-    m_Value: 0.033
+    m_OverrideState: 0
+    m_Value: 0
   clamp:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.759434, g: 1, b: 0.9894452, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 0
@@ -69,11 +69,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 6
   dirtTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
     dimension: 1
   dirtIntensity:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
 --- !u!114 &-1812201913012123201
 MonoBehaviour:
@@ -118,6 +118,7 @@ MonoBehaviour:
   components:
   - {fileID: -4827806913211922316}
   - {fileID: -3840857081971277975}
+  - {fileID: 7352990176204134852}
 --- !u!114 &6357156913872135321
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -165,3 +166,28 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &7352990176204134852
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 0
+    m_Value: 0
+  quality:
+    m_OverrideState: 1
+    m_Value: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.02
+  clamp:
+    m_OverrideState: 0
+    m_Value: 0.05

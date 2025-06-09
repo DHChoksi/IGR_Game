@@ -4,39 +4,19 @@ using UnityEngine;
 
 public class RangeCollider : MonoBehaviour
 {
-    [SerializeField] 
-    private Collider m_RangeCollider;
-
-    private void Start()
-    {
-        m_RangeCollider = GetComponent<Collider>();    
-    }
-
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
-    }
-
-    private void OnTriggerStay(Collider other)
+    [SerializeField]
+    private GameObject m_RangeEffect = null;
+    
+    private void OnTriggerEnter(Collider other)
     {
         Vector3 objectPosiiton = other.gameObject.transform.position;
-        CalculateDistance(objectPosiiton);
-    }
-
-    private void CalculateDistance(Vector3 posiiton)
-    {
-        float distance = Vector3.Distance(transform.position, posiiton);
-        float minDistance = 2.5f;
-
-        if (distance <= minDistance)
+        if (m_RangeEffect != null )
         {
-           // Debug.Log("Exposed" + distance);
+            GameObject effect = Instantiate(m_RangeEffect, gameObject.transform.parent.position, Quaternion.identity);
+            effect.transform.parent = transform;
+            Destroy(transform.parent.gameObject, 1f); 
         }
     }
+
 
 }

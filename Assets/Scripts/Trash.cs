@@ -11,17 +11,17 @@ public class Trash : MonoBehaviour
     [SerializeField][Range(0, 50f)] private float m_SpinSpeed = 0.1f;
 
     [Header("Radiation Settings")]
-    [SerializeField] private float outerRadius = 6f;
-    [SerializeField] private float innerRadius = 3f;
-    [SerializeField] private float deathRadius = 1.5f;
+    [SerializeField] private float m_RadiationRadius = 10f;
+    [SerializeField] private float m_CloseThreshold = 0.5f; // Threshold to disable effect when very close
 
-    [Header("Effects & UI")]
-    [SerializeField] private GameObject warningArrow;
-    [SerializeField] private ParticleSystem radiationParticles;
+    [Header("Core Distance Reset")]
+    [SerializeField][Range(0f, 10000f)] private float m_MaxCoreDistance = 10000f;
 
     private Vector3 m_Direction = Vector3.zero;
-    private PlayerType m_PlayerType = PlayerType.MotionSickGamer;
     private Transform m_Player;
+    private Transform m_Core;
+    private Vector3 m_OriginalPosition;
+    private bool m_IsEffectActive = false;
 
     private enum m_ActivateTracking { None, Deactivate, Activate }
     private m_ActivateTracking m_CurrentState = m_ActivateTracking.None;
@@ -34,40 +34,31 @@ public class Trash : MonoBehaviour
 
     private void Start()
     {
-        m_PlayerType = (PlayerType)PlayerPrefs.GetInt(CURRENT_PLAYER_TYPE, 1);
         m_Player = GameObject.FindWithTag("Player").transform;
+        m_Core = GameObject.FindWithTag("Core")?.transform;
+        m_OriginalPosition = transform.position;
 
         SetSpinDirections();
 
         m_CurrentState = m_TrashType == TrashType.Normal
             ? m_ActivateTracking.Deactivate
             : m_ActivateTracking.Activate;
-
-        if (warningArrow != null)
-            warningArrow.SetActive(false);
-
-        if (radiationParticles != null)
-        {
-            radiationParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
     }
 
     private void Update()
     {
         Spin();
 
-        if (m_TrashType == TrashType.Normal) 
-            return;
-
-        if (m_CurrentState != m_ActivateTracking.Deactivate)
+        if (m_TrashType != TrashType.Normal && m_CurrentState != m_ActivateTracking.Deactivate)
+        {
             TrackPlayerDistance();
+        }
+
+        CheckCoreDistance();
     }
 
     private void SetSpinDirections()
     {
-        if (m_PlayerType == PlayerType.MotionSickGamer) 
-            return;
-
         int[] number = { -1, 0, 1 };
         m_Direction = new Vector3(
             number[Random.Range(0, 3)],
@@ -99,84 +90,47 @@ public class Trash : MonoBehaviour
     private void Disable()
     {
         gameObject.SetActive(false);
-    } 
+    }
 
     private void TrackPlayerDistance()
     {
+        if (m_Player == null) return;
+
         float dist = Vector3.Distance(m_Player.position, transform.position);
 
-        if (dist <= deathRadius)
+        if (dist <= m_RadiationRadius && dist > m_CloseThreshold)
         {
-            ExposeToRadioactivity();
-        }
-        else if (dist <= innerRadius)
-        {
-            EnableRadiationEffect(5f);
-            ShowWarningArrow(true);
-        }
-        else if (dist <= outerRadius)
-        {
-            EnableRadiationEffect(2.5f);
-            ShowWarningArrow(true); 
-        } 
-        else
-        {
-            EnableRadiationEffect(1f);
-            ShowWarningArrow(false);
-        }
-    }
-
-    private void ShowWarningArrow(bool show)
-    {
-        if (warningArrow == null) 
-            return;
-
-        warningArrow.SetActive(show);
-
-        if (show)
-        {
-            Vector3 dir = (transform.position - m_Player.position).normalized;
-            Vector3 screenPoint = Camera.main.WorldToScreenPoint(m_Player.position + dir * 2f);
-            warningArrow.transform.position = screenPoint;
-        }
-    }
-
-    private void EnableRadiationEffect(float intensity)
-    {
-        if (radiationParticles == null)
-            return;
-
-        var main = radiationParticles.main;
-        Color color = main.startColor.color;
-        color.a = Mathf.Lerp(color.a, intensity, Time.deltaTime * 5f);
-        main.startColor = color;
-
-        if (intensity > 0 && !radiationParticles.isPlaying)
-            radiationParticles.Play();
-        else if (intensity <= 0 && radiationParticles.isPlaying)
-            radiationParticles.Stop();
-    }
-
-    private void ExposeToRadioactivity()
-    {
-        Debug.Log("☢️ Player entered radioactive zone!");
-
-        EnableRadiationEffect(1f);
-
-       /* if (m_TrashType == TrashType.Explosive)
-        {
-            ExplodeTrash();
+            if (!m_IsEffectActive)
+            {
+                m_IsEffectActive = true;
+                GeneralEvents.OnHurtEffect?.Invoke(true); //  Enable hurt effect
+            }
         }
         else
         {
-            Disable();
-        }*/
+            if (m_IsEffectActive)
+            {
+                m_IsEffectActive = false;
+                GeneralEvents.OnHurtEffect?.Invoke(false); //  Disable hurt effect
+            }
+        }
     }
 
     private void ExplodeTrash()
     {
-        Debug.Log("💥 Trash exploded!");
-        // Add explosion particles, camera shake, etc. here
         Destroy(gameObject);
+    }
+
+    private void CheckCoreDistance()
+    {
+        if (m_Core == null) return;
+
+        float distFromCore = Vector3.Distance(transform.position, m_Core.position);
+        if (distFromCore > m_MaxCoreDistance)
+        {
+            Debug.Log($"📦 {name} too far from Core. Resetting position.");
+            transform.position = m_OriginalPosition;
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
     }
 }

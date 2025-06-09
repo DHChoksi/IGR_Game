@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyHealthBar : MonoBehaviour
 {
-    private Transform cam;
+    private Transform m_Camera;
+
     private void Start()
     {
-        cam = Camera.main.transform;
+        m_Camera = Camera.main.transform;
     }
-
     private void LateUpdate()
     {
-        transform.LookAt(cam);
+        transform.LookAt(m_Camera);
     }
 }

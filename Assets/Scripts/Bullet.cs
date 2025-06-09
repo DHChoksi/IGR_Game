@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null) 
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage();
             }
 
-            Destroy(gameObject, 0.05f); // fast cleanup
+            Destroy(gameObject, 0.05f); 
         }
     }
 

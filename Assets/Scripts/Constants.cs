@@ -13,29 +13,6 @@ namespace Constants
             Explosive
         }
 
-        public enum PlayerType
-        {
-            MotionSickGamer,
-            ProGamer
-        }
-
-        public enum ControllerGrappleState
-        {
-            None,
-            Press,
-            Hold,
-            Release
-        }
-
-        public enum GripState
-        {
-            Press,
-            Hold,
-            Release
-        }
-
-        public static string CURRENT_PLAYER_TYPE = "PlayerType";
-
         public enum LR_Device
         {
             None = 0,
@@ -47,6 +24,15 @@ namespace Constants
         {
             Pressed = 1,
             NotPressed = 0
+        }
+
+
+        public enum DrownState 
+        { 
+            Move, 
+            PlayerDetected, 
+            Attack, 
+            Death 
         }
 
         public enum ControlType
@@ -61,11 +47,10 @@ namespace Constants
 
         public enum SceneName
         {
-            MainMenu = 0,
             StoryBoard,
-            Training,
-            Gameplay
-
+            Phase_1,
+            Instruction,
+            Phase_2
         }
 
         public enum SpeakerName
@@ -74,32 +59,17 @@ namespace Constants
             Ranger
         }
 
-        public enum TaskDone
+         public enum TaskDone
         {
             Done,
             NotDone = 0
         }
-
-        public enum CrosshairState
-        {
-            defaultState,
-            TargetState
-        }
-
 
         public enum GripAction
         {
             None,
             WebSwinging,
             HyperHook
-        }
-
-        public enum DrownState
-        {
-            Move, 
-            PlayerDetected, 
-            Attack, 
-            Death 
         }
 
         public static float MAX_HIT_DETECT_DISTANCE = 1000000f;
