@@ -3,8 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class IntroSceneChanger : MonoBehaviour
-{   
-   
+{
+    private void Start()
+    {
+        GeneralEvents.OnStartMission?.Invoke(SceneName.Instruction, 3f);
+    }
+
     public void LoadScene()
     {
         LoadTargetScene(SceneName.Phase_2);

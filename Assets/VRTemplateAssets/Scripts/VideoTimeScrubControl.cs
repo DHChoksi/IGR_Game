@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using static Constants.Constants;
 
 namespace Unity.VRTemplate
 {
@@ -41,13 +42,17 @@ namespace Unity.VRTemplate
         [Tooltip("If checked, the slider will fade off after a few seconds. If unchecked, the slider will remain on.")]
         bool m_HideSliderAfterFewSeconds;
 
+        [SerializeField]
+        [Tooltip("Its Custom video name")]
+        VideoName m_VideoName = VideoName.None;
+
         bool m_IsDragging;
         bool m_VideoIsPlaying;
         bool m_VideoJumpPending;
         long m_LastFrameBeforeScrub;
         VideoPlayer m_VideoPlayer;
 
-
+        
         void Start()
         {
             m_VideoPlayer = GetComponent<VideoPlayer>();
@@ -169,6 +174,13 @@ namespace Unity.VRTemplate
             {
                 var currentTimeTimeSpan = TimeSpan.FromSeconds(m_VideoPlayer.time);
                 var totalTimeTimeSpan = TimeSpan.FromSeconds(m_VideoPlayer.length);
+
+                if (m_VideoName == VideoName.IGR_Intro)
+                {
+                    GeneralEvents.OnStartMission?.Invoke(SceneName.StoryBoard, (float)m_VideoPlayer.length);
+                    m_VideoName = VideoName.None;
+                }
+
                 var currentTimeString = string.Format("{0:D2}:{1:D2}",
                     currentTimeTimeSpan.Minutes,
                     currentTimeTimeSpan.Seconds
@@ -200,6 +212,9 @@ namespace Unity.VRTemplate
 
         void PlayClip(bool capPlay)
         {
+            if (m_VideoName == VideoName.None)
+                return;
+
             VideoPlay();
         }
 

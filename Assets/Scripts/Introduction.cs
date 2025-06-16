@@ -24,9 +24,6 @@ public class Introduction : MonoBehaviour
     private TextMeshProUGUI m_KaaraTextMeshPro = null;
 
     [SerializeField]
-    private TextMeshProUGUI m_RangerTextMeshPro = null;
-
-    [SerializeField]
     private List<DialogesManager> m_Dialoges = new List<DialogesManager>();
 
     [SerializeField]
@@ -67,7 +64,4 @@ public class Introduction : MonoBehaviour
 
         m_KaaraTextMeshPro.text = "Check the controls on your left, then press 'Start Mission' on your right when you're ready!";
     }
-
-    
-
 }

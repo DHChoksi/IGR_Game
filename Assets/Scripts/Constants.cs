@@ -53,6 +53,12 @@ namespace Constants
             Phase_2
         }
 
+        public enum VideoName
+        {
+            None = 0,
+            IGR_Intro
+        }
+
         public enum SpeakerName
         {
             Kaara = 0,

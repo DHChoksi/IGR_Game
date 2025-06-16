@@ -24,11 +24,14 @@ public class WinLoseManager : MonoBehaviour
         m_ResultPanel.SetActive(true);
         m_ResultText.text = isWin ? "You Win!" : "You Lose!";
         int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        m_CurrentLevel = currentLevel;
+        
+        StartCoroutine(DelayedSceneChange());
+
         int nextLevel = currentLevel == 1 ? 2 : 1;
-        m_CurrentLevel = nextLevel;
+        Debug.Log("Current Level" + currentLevel + " Next Level" + nextLevel);
         PlayerPrefs.SetInt("CurrentLevel", nextLevel);
         PlayerPrefs.Save();
-        StartCoroutine(DelayedSceneChange());
     }
 
     private IEnumerator DelayedSceneChange()

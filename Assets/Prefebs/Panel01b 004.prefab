@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 5185806553899426077}
   - component: {fileID: 7848577453588568693}
   - component: {fileID: 3690945974636992829}
+  - component: {fileID: 8499435121694528731}
+  - component: {fileID: 6030429421699492828}
+  - component: {fileID: 4654644643468516208}
   m_Layer: 8
   m_Name: Panel01b 004
   m_TagString: Trash
@@ -28,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.17228161, z: 0, w: 0.98504776}
   m_LocalPosition: {x: -124.41834, y: -99.57, z: -98.907425}
-  m_LocalScale: {x: 0.70831, y: 0.70831, z: 0.70831}
+  m_LocalScale: {x: 0.4586433, y: 0.4586433, z: 0.4586433}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +86,70 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8499435121694528731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5831729400118228763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346e16c4a0d1fda49b1a968639019074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrashType: 0
+  m_TrashID: 
+  m_SpinSpeed: 0.1
+  m_RadiationRadius: 10
+  m_CloseThreshold: 0.5
+  m_MaxCoreDistance: 10000
+--- !u!54 &6030429421699492828
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5831729400118228763}
+  serializedVersion: 4
+  m_Mass: 0.3
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!64 &4654644643468516208
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5831729400118228763}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5994831939033197359, guid: c0fe5f9036e84ec40942724d267696be, type: 3}

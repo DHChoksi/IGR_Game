@@ -9,4 +9,5 @@ public class GeneralEvents : MonoBehaviour
 
     public static Action<SceneName> OnSceneChangeRequest;
 
+    public static Action<SceneName, float> OnStartMission;
 }
