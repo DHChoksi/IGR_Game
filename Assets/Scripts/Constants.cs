@@ -78,6 +78,25 @@ namespace Constants
             HyperHook
         }
 
+        public enum SFXType
+        {
+            ButtonClick,
+            GunShoot,
+            Jetpack,
+            Blast,
+            Grab,
+            Shoot,
+            Hurt,
+            CollectObject
+        }
+
+        public enum BGMType
+        {
+            Menu,
+            Training,
+            Gameplay
+        }
+
         public static float MAX_HIT_DETECT_DISTANCE = 1000000f;
         public static float TRASH_DETECT_DISTANCE = 1000000f;
         public static float ENEMY_DETECT_DISTANCE = 1000000f; 
