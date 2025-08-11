@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4449874648957781463}
   - component: {fileID: 4449874648957781462}
   - component: {fileID: 5015329510633069628}
+  - component: {fileID: 9023595268618445063}
   m_Layer: 8
   m_Name: Explosive_Tank4
   m_TagString: Trash
@@ -155,6 +156,23 @@ CapsuleCollider:
   m_Height: 1.6268827
   m_Direction: 1
   m_Center: {x: 0, y: 8.8731614e-16, z: 0.5499837}
+--- !u!114 &9023595268618445063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449874648955853588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
+  needBoxIndicator: 1
+  needArrowIndicator: 1
+  needDistanceText: 1
+  indicator: {fileID: 0}
 --- !u!1 &4449874649139510312
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ public class Gun : MonoBehaviour
 
     private bool m_CanShoot = true;
 
+    float waitTime = 0;
+
     private void OnEnable()
     {
         InputEvents.TriggerActionInputs += OnTrigger;
@@ -47,6 +49,7 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
+
         if (m_Bullet != null && m_MuzzleTransform != null)
         {
             // Spawn the bullet with correct position and rotation immediately
@@ -55,7 +58,7 @@ public class Gun : MonoBehaviour
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = bullet.transform.forward * m_BulletSpeed;
+                rb.linearVelocity = bullet.transform.forward * m_BulletSpeed;
             }
 
             // Optional: Add VFX or SFX
@@ -71,14 +74,14 @@ public class Gun : MonoBehaviour
             }
             */
 
-            StartCoroutine(FireCooldown());
+            //StartCoroutine(FireCooldown());
         }
     }
 
-    private IEnumerator FireCooldown()
-    {
-        m_CanShoot = false;
-        yield return new WaitForSeconds(m_FireRate);
-        m_CanShoot = true;
-    }
+    //private IEnumerator FireCooldown()
+    //{
+    //    m_CanShoot = false;
+    //    yield return new WaitForSeconds(m_FireRate);
+    //    m_CanShoot = true;
+    //}
 }

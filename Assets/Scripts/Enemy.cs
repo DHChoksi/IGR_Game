@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour
         if (rb != null)
         {
             // Adjust as needed
-            rb.velocity = direction * m_MissileSpeed;
+            rb.linearVelocity = direction * m_MissileSpeed;
             rb.useGravity = false;   // Optional: depends on your missile type
         }
 

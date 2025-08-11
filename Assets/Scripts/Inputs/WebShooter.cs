@@ -19,8 +19,8 @@ public class WebShooter : MonoBehaviour
     private Vector3 m_SwingPoint = Vector3.zero;
     private SpringJoint m_SpringJoint = null;
 
-    [SerializeField]
-    private CrosshairController m_CrosshairController = null;   
+    //[SerializeField]
+    //private CrosshairController m_CrosshairController = null;   
 
     [SerializeField]
     private float m_SpringStrength = 4.5f;
@@ -41,6 +41,7 @@ public class WebShooter : MonoBehaviour
     private void OnEnable()
     { 
         InputEvents.GripActionInputs += OnGrip;
+        Debug.Log("Start Swing");
     }
      
     private void OnDisable()
@@ -72,7 +73,7 @@ public class WebShooter : MonoBehaviour
 
     private void Update()
     {
-        m_CurrentGripAction = m_CurrentDevice == LR_Device.L_Device ? m_CrosshairController._LeftGripActionType : m_CrosshairController._RightGripActionType; 
+       // m_CurrentGripAction = m_CurrentDevice == LR_Device.L_Device ? m_CrosshairController._LeftGripActionType : m_CrosshairController._RightGripActionType; 
     }
 
     public bool IsGrappling()
@@ -87,6 +88,7 @@ public class WebShooter : MonoBehaviour
      
     void OnGrip(LR_Device lr_Device, ControlType controlType, ControlState controlState, float gripValue)
     {
+        Debug.Log("Start Swing");
         if (m_CurrentDevice != lr_Device) 
         {
             return;
