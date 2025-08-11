@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ITargetable { void OnHoverEnter(); void OnHoverExit(); }
+public interface ITargetable { void OnHoverEnter(CrosshairTargeting crosshair,RaycastHit hit); void OnHoverExit(); CrosshairTargeting crosshair { get; set; } }
 
 public class CrosshairTargeting : MonoBehaviour
 {
@@ -24,6 +24,9 @@ public class CrosshairTargeting : MonoBehaviour
     [Header("Billboard")]
     [SerializeField] bool smoothRotation = true;
     [SerializeField] float rotateLerp = 20f;
+
+    [Header("WebShooter")]
+    public WebShooter webShooter;
 
     // internals
     Camera _cam; Transform _camT;
@@ -87,7 +90,7 @@ public class CrosshairTargeting : MonoBehaviour
                 if (_lastHitRoot)
                     foreach (var t in _lastHitRoot.GetComponentsInChildren<ITargetable>(true)) t.OnHoverExit();
                 if (root)
-                    foreach (var t in root.GetComponentsInChildren<ITargetable>(true)) t.OnHoverEnter();
+                    foreach (var t in root.GetComponentsInChildren<ITargetable>(true)) t.OnHoverEnter(this, hit);
                 _lastHitRoot = root;
             }
         }
