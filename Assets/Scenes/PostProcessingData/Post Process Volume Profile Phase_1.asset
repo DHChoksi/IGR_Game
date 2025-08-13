@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   color:
     m_OverrideState: 1
     m_Value: {r: 0.050314426, g: 0.050314426, b: 0.050314426, a: 1}
@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.15
   smoothness:
     m_OverrideState: 1
     m_Value: 1
@@ -118,7 +118,6 @@ MonoBehaviour:
   components:
   - {fileID: -4827806913211922316}
   - {fileID: -3840857081971277975}
-  - {fileID: 7352990176204134852}
 --- !u!114 &6357156913872135321
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -166,28 +165,3 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 0
     m_Value: 0
---- !u!114 &7352990176204134852
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 1
-  mode:
-    m_OverrideState: 0
-    m_Value: 0
-  quality:
-    m_OverrideState: 1
-    m_Value: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.02
-  clamp:
-    m_OverrideState: 0
-    m_Value: 0.05

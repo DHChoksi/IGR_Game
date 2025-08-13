@@ -17,13 +17,13 @@ public class WebShooter : MonoBehaviour
     private LR_Device m_CurrentDevice = LR_Device.None; 
 
     private Vector3 m_SwingPoint = Vector3.zero;
-    private SpringJoint m_SpringJoint = null;
-
-    [SerializeField]
-    private CrosshairController m_CrosshairController = null;   
+    private SpringJoint m_SpringJoint = null; 
 
     [SerializeField]
     private float m_SpringStrength = 4.5f;
+
+
+    public RaycastHit raycastHit;
 
     private GripAction m_CurrentGripAction = GripAction.None;
     public Vector3 _CurrentGrapplePosition 
@@ -41,38 +41,31 @@ public class WebShooter : MonoBehaviour
     private void OnEnable()
     { 
         InputEvents.GripActionInputs += OnGrip;
+        Debug.Log("Start Swing");
     }
      
     private void OnDisable()
     {
         InputEvents.GripActionInputs -= OnGrip;
     }
-
-    private GripAction m_GripAction = GripAction.None;
    
     private void StartSwing()
     {
-        RaycastHit raycastHit;
-        if (Physics.Raycast(m_GunTip.position, m_GunTip.forward, out raycastHit, Mathf.Infinity, m_LayerMask))
-        {
-            m_SwingPoint = raycastHit.point;
-            m_SpringJoint = m_Player.AddComponent<SpringJoint>();
-            m_SpringJoint.autoConfigureConnectedAnchor = false;
-            m_SpringJoint.connectedAnchor = m_SwingPoint;
+        if (raycastHit.collider == null)
+            return;
 
-            float distanceFromPoint = Vector3.Distance(m_Player.position, m_SwingPoint);
+        m_SwingPoint = raycastHit.point;
+        m_SpringJoint = m_Player.AddComponent<SpringJoint>();
+        m_SpringJoint.autoConfigureConnectedAnchor = false;
+        m_SpringJoint.connectedAnchor = m_SwingPoint;
 
-            m_SpringJoint.maxDistance = distanceFromPoint * 0.9f;
-            m_SpringJoint.minDistance = distanceFromPoint * 0.01f;
+        float distanceFromPoint = Vector3.Distance(m_Player.position, m_SwingPoint);
 
-            m_SpringJoint.spring = m_SpringStrength;
-            m_SpringJoint.massScale = 10f;
-        }
-    }
+        m_SpringJoint.maxDistance = distanceFromPoint * 0.9f;
+        m_SpringJoint.minDistance = distanceFromPoint * 0.01f;
 
-    private void Update()
-    {
-        m_CurrentGripAction = m_CurrentDevice == LR_Device.L_Device ? m_CrosshairController._LeftGripActionType : m_CrosshairController._RightGripActionType; 
+        m_SpringJoint.spring = m_SpringStrength;
+        m_SpringJoint.massScale = 10f;
     }
 
     public bool IsGrappling()
@@ -82,11 +75,13 @@ public class WebShooter : MonoBehaviour
 
     private void StopSwing()
     {
+        raycastHit = new RaycastHit();
         Destroy(m_SpringJoint); 
     }
      
     void OnGrip(LR_Device lr_Device, ControlType controlType, ControlState controlState, float gripValue)
     {
+        Debug.Log("Start Swing");
         if (m_CurrentDevice != lr_Device) 
         {
             return;
