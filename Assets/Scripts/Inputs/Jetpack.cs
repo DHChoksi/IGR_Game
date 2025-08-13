@@ -66,7 +66,7 @@ public class Jetpack : MonoBehaviour
             m_CurrentVelocity = Vector3.Lerp(m_CurrentVelocity, Vector3.zero, Time.fixedDeltaTime * m_Deceleration);
         }
 
-        m_PlayerRigidbody.velocity = m_CurrentVelocity; 
+        m_PlayerRigidbody.linearVelocity = m_CurrentVelocity; 
     }
 
     private void OnGrip(LR_Device lr_Device, ControlType controlType, ControlState controlState, float gripValue)

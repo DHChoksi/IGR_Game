@@ -69,7 +69,7 @@ public class HyperHook : MonoBehaviour
 
             if (m_GrabbedRigidbody != null)
             { 
-                m_GrabbedRigidbody.velocity = direction * m_GrabingSpeed;
+                m_GrabbedRigidbody.linearVelocity = direction * m_GrabingSpeed;
             }
 
             if (distance < 2f)
@@ -77,7 +77,7 @@ public class HyperHook : MonoBehaviour
                 Vector3 ObjectPosition = m_GrabingTip.transform.position;  
                 m_GrabbedObject.SetParent(m_GrabingTip);
                 m_GrabbedObject.GetComponent<MeshRenderer>().enabled = false;
-                m_GrabbedRigidbody.velocity = Vector3.zero;
+                m_GrabbedRigidbody.linearVelocity = Vector3.zero;
                 m_WebLine.enabled = false;
             }
         }
@@ -117,7 +117,7 @@ public class HyperHook : MonoBehaviour
 
             if (m_GrabbedRigidbody != null)
             {
-                m_GrabbedRigidbody.drag = 2f;
+                m_GrabbedRigidbody.linearDamping = 2f;
             }
 
             m_WebLine.enabled = true;
@@ -134,12 +134,12 @@ public class HyperHook : MonoBehaviour
 
             if (m_GrabbedRigidbody != null)
             {
-                m_GrabbedRigidbody.drag = 0f;
+                m_GrabbedRigidbody.linearDamping = 0f;
 
                 Vector3 shootDirection = m_GrabingTip.forward;  
                 float shootForce = m_GrabingSpeed * 2f;         
 
-                m_GrabbedRigidbody.velocity = shootDirection * shootForce;
+                m_GrabbedRigidbody.linearVelocity = shootDirection * shootForce;
                 m_GrabbedObject.GetComponent<MeshRenderer>().enabled = true;
             }
 

@@ -130,7 +130,7 @@ public class Trash : MonoBehaviour
         {
             Debug.Log($"📦 {name} too far from Core. Resetting position.");
             transform.position = m_OriginalPosition;
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameObject.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         }
     }
 }

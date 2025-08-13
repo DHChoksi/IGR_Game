@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.velocity = bullet.transform.forward * m_BulletSpeed;
+                rb.linearVelocity = bullet.transform.forward * m_BulletSpeed;
             }
 
             // Optional: Add VFX or SFX
