@@ -51,7 +51,7 @@ public class WebShooter : MonoBehaviour
    
     private void StartSwing()
     {
-        if (raycastHit.point == null)
+        if (raycastHit.collider == null)
             return;
 
         m_SwingPoint = raycastHit.point;

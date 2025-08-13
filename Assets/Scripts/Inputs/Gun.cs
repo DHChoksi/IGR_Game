@@ -22,8 +22,11 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private LR_Device m_Device = LR_Device.None;
 
-    private bool m_CanShoot = true;
+    [SerializeField]
+    private ParticleSystem muzzleFlash;
 
+    private bool m_CanShoot = true;
+    public CrosshairTargeting crosshairTargeting;
     float waitTime = 0;
 
     private void OnEnable()
@@ -54,34 +57,14 @@ public class Gun : MonoBehaviour
         {
             // Spawn the bullet with correct position and rotation immediately
             GameObject bullet = Instantiate(m_Bullet, m_MuzzleTransform.position, m_MuzzleTransform.rotation);
-
+            muzzleFlash.Play();
+            bullet.transform.forward = crosshairTargeting.camRay.direction;
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.linearVelocity = bullet.transform.forward * m_BulletSpeed;
             }
-
-            // Optional: Add VFX or SFX
-            /*
-            if (m_MuzzleFlash != null)
-            {
-                m_MuzzleFlash.Play();
-            }
-
-            if (m_GunShotSound != null)
-            {
-                m_GunShotSound.Play();
-            }
-            */
-
-            //StartCoroutine(FireCooldown());
         }
     }
 
-    //private IEnumerator FireCooldown()
-    //{
-    //    m_CanShoot = false;
-    //    yield return new WaitForSeconds(m_FireRate);
-    //    m_CanShoot = true;
-    //}
 }

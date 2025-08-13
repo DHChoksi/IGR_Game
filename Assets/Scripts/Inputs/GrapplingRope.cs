@@ -68,9 +68,6 @@ public class GrapplingRope : MonoBehaviour
             rope.SetStartPoint(webShooterStart);
             m_Spring.Reset();
             points.Clear();
-
-            //if(m_LineRenderer.positionCount > 0)
-            //   m_LineRenderer.positionCount = 0; 
             
             rope.gameObject.SetActive(false);
             return;
@@ -81,13 +78,6 @@ public class GrapplingRope : MonoBehaviour
             rope.gameObject.SetActive(true);
             m_Spring.SetVelocity(m_Velocity);
         }
-
-        //if (m_LineRenderer.positionCount == 0)
-        //{ 
-        //    m_Spring.SetVelocity(m_Velocity);
-        //    m_LineRenderer.positionCount = m_RopeQuality + 1;
-        //} 
-         
         m_Spring.SetStrength(m_Strength);
         m_Spring.Update(Time.deltaTime);
         m_Spring.SetDamper(m_Damper);
@@ -99,15 +89,6 @@ public class GrapplingRope : MonoBehaviour
         m_CurrentGrapplePosition = Vector3.Lerp(m_CurrentGrapplePosition, grapplePoint, Time.deltaTime * 12f);
         webShooterEnd.position = m_CurrentGrapplePosition;
 
-        rope.SetEndPoint(webShooterEnd);
-
-        //for (int i = 0; i < rope.OverallDivision + 1; i++)
-        //{
-        //    float delta = i / (float)rope.OverallDivision;
-        //    Vector3 offset = quaternion * m_WaveHeight * Mathf.Sin(delta * m_WaveCount * Mathf.PI) * m_Spring.Value * m_AffectCurve.Evaluate(delta);
-        //    points.Add(offset);
-        //    rope.CreateRopeMesh(points.ToArray(), rope.ropeWidth, rope.radialDivision);
-        //    //m_LineRenderer.SetPosition(i, Vector3.Lerp(gunTip, m_CurrentGrapplePosition, delta) + offset);
-        //}   
+        rope.SetEndPoint(webShooterEnd); 
     }
 } 
