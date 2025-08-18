@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Constants.Constants;
 
-[CreateAssetMenu(menuName = "Audio/Audio Library")]
+[CreateAssetMenu(menuName = "IGR/Audio Library")]
 public class AudioLibrarySO : ScriptableObject
 {
     [System.Serializable]

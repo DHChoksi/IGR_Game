@@ -97,6 +97,25 @@ namespace Constants
             Gameplay
         }
 
+        public enum HapticType
+        {
+            JetpackStart,
+            JetpackSustain,
+            GunShoot,
+            GunReload,
+            WebAttach,
+            WebSwing,
+            PlayerHitLight,
+            PlayerHitHeavy,
+            EnemyHit,
+            GrabObject,
+            ThrowCharge,
+            ObjectImpact,
+            LowHealth,
+            CriticalHealth,
+            DeathPulse
+        }
+
         public static float MAX_HIT_DETECT_DISTANCE = 1000000f;
         public static float TRASH_DETECT_DISTANCE = 1000000f;
         public static float ENEMY_DETECT_DISTANCE = 1000000f; 
