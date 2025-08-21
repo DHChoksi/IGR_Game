@@ -10,9 +10,6 @@ public class WebShooter : MonoBehaviour
     [SerializeField]
     private Transform m_Player = null;
 
-    [SerializeField] 
-    private LayerMask m_LayerMask;
-
     [SerializeField]    
     private LR_Device m_CurrentDevice = LR_Device.None; 
 

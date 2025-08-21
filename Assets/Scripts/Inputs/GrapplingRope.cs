@@ -8,13 +8,7 @@ public class GrapplingRope : MonoBehaviour
     private Vector3 m_CurrentGrapplePosition = Vector3.zero;    
 
     [SerializeField]
-    private LineRenderer m_LineRenderer = null;
-
-    [SerializeField]
     private WebShooter m_WebShooter = null;
-
-    [SerializeField]
-    private int m_RopeQuality = 0;
 
     [SerializeField]
     private Spring m_Spring = null;
@@ -27,15 +21,6 @@ public class GrapplingRope : MonoBehaviour
 
     [SerializeField] 
     private float m_Velocity = 0;
-
-    [SerializeField] 
-    private float m_WaveCount = 0;
-
-    [SerializeField] 
-    private float m_WaveHeight = 0; 
-    
-    [SerializeField] 
-    private AnimationCurve m_AffectCurve;
 
     [SerializeField]
     private Transform webShooterEnd;
@@ -50,7 +35,6 @@ public class GrapplingRope : MonoBehaviour
 
     private void Awake()
     {
-        m_LineRenderer = GetComponent<LineRenderer>();
         m_Spring = new Spring();
         m_Spring.SetTarget(0);
     }

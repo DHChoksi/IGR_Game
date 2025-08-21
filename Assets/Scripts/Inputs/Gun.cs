@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -9,6 +10,12 @@ public class Gun : MonoBehaviour
 
     [SerializeField]
     private GameObject m_Bullet;
+
+    [SerializeField]
+    private Transform gunModel;
+
+    [SerializeField]
+    public Vector3 recoilValue;
 
     [SerializeField]
     private Transform m_MuzzleTransform;
@@ -56,8 +63,15 @@ public class Gun : MonoBehaviour
         if (m_Bullet != null && m_MuzzleTransform != null)
         {
             // Spawn the bullet with correct position and rotation immediately
+
+            if(!DOTween.IsTweening(gunModel))
+            {
+                gunModel.DOLocalRotate(recoilValue, 0.1f, RotateMode.LocalAxisAdd).OnComplete(() => { gunModel.localEulerAngles = Vector3.zero; });
+            }
+
             GameObject bullet = Instantiate(m_Bullet, m_MuzzleTransform.position, m_MuzzleTransform.rotation);
             muzzleFlash.Play();
+            AudioManager.Instance.PlaySFX(SFXType.GunShoot, 0.5f);
             bullet.transform.forward = crosshairTargeting.camRay.direction;
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)

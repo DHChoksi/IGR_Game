@@ -35,6 +35,8 @@ public class AudioManager : MonoBehaviour
         musicObj.transform.SetParent(transform);
         musicHandler = musicObj.AddComponent<MusicAudioHandler>();
         musicHandler.Init(musicObj.AddComponent<AudioSource>());
+
+        PlayMusic(BGMType.Training);
     }
 
     // Public APIs

@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff976903056745e4a91c9e80168da284, type: 3}
   m_Name: AudioLibrary
   m_EditorClassIdentifier: 
-  m_SfxClips: []
-  m_BgMusicClips: []
+  m_SfxClips:
+  - m_SFXType: 1
+    m_SFXAudioClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+  - m_SFXType: 4
+    m_SFXAudioClip: {fileID: 8300000, guid: f22e87740453ac248871d5e33e57d4d8, type: 3}
+  m_BgMusicClips:
+  - m_BGMusicType: 1
+    m_BGMusicClip: {fileID: 8300000, guid: 4dbdeb933e1da9a48a55c2bbb840e223, type: 3}
