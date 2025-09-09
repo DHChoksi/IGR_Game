@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0656487b5a7f3b34fbc29c6d6cd1fff1, type: 3}
+  m_Name: HapticLibrarySO
+  m_EditorClassIdentifier: 
+  haptics:
+  - type: 0
+    duration: 0.25
+    frequency: 0.8
+    amplitude: 0.6
+    bothHands: 0
+  - type: 1
+    duration: 0.1
+    frequency: 0.2
+    amplitude: 0.2
+    bothHands: 0
+  - type: 2
+    duration: 0.1
+    frequency: 1
+    amplitude: 0.6
+    bothHands: 0
+  - type: 3
+    duration: 0.2
+    frequency: 0.6
+    amplitude: 0.4
+    bothHands: 0
+  - type: 4
+    duration: 0.1
+    frequency: 0.4
+    amplitude: 0.3
+    bothHands: 0
+  - type: 5
+    duration: 0.2
+    frequency: 0.3
+    amplitude: 0.4
+    bothHands: 0
+  - type: 6
+    duration: 0.15
+    frequency: 0.6
+    amplitude: 0.5
+    bothHands: 0
+  - type: 7
+    duration: 0.3
+    frequency: 1
+    amplitude: 0.8
+    bothHands: 1
+  - type: 8
+    duration: 0.1
+    frequency: 0.5
+    amplitude: 0.4
+    bothHands: 0
+  - type: 9
+    duration: 0.1
+    frequency: 0.5
+    amplitude: 0.3
+    bothHands: 0
+  - type: 10
+    duration: 0.25
+    frequency: 0.2
+    amplitude: 0.5
+    bothHands: 0
+  - type: 11
+    duration: 0.15
+    frequency: 0.8
+    amplitude: 0.5
+    bothHands: 0
+  - type: 12
+    duration: 0.3
+    frequency: 0.2
+    amplitude: 0.5
+    bothHands: 1
+  - type: 13
+    duration: 0.2
+    frequency: 0.2
+    amplitude: 1
+    bothHands: 1
+  - type: 14
+    duration: 0.4
+    frequency: 1
+    amplitude: 1
+    bothHands: 1

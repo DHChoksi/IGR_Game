@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Constants.Constants;
 
-[CreateAssetMenu(fileName = "HapticProfileSO", menuName = "IGR/HapticProfileSO")]
-public class HapticProfileSO : ScriptableObject
+[CreateAssetMenu(menuName = "Haptics/Haptic Library")]
+public class HapticLibrarySO : ScriptableObject
 {
     [System.Serializable]
     public class HapticData
@@ -15,6 +15,7 @@ public class HapticProfileSO : ScriptableObject
         public bool bothHands = false;
     }
 
+    [Header("Haptic Profiles")]
     public List<HapticData> haptics = new List<HapticData>();
 
     public HapticData GetHaptic(HapticType type)
