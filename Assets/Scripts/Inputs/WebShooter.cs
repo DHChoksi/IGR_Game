@@ -83,7 +83,7 @@ public class WebShooter : MonoBehaviour
             m_PullParticles.Stop();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (m_SpringJoint == null || m_PlayerRb == null) return;
 

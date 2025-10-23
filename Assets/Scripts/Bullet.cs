@@ -7,27 +7,21 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SelfDestroy(destroyDelay));
+        Destroy(gameObject,8f);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter (Collider other)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            SpaceShipHealth enemy = other.gameObject.GetComponent<SpaceShipHealth>();
             if (enemy != null) 
             {
-                enemy.TakeDamage();
+                enemy.ApplyDamage(50);
+                Destroy(gameObject, 0.05f);
             }
-
-            Destroy(gameObject, 0.05f); 
         }
     }
 
-    private IEnumerator SelfDestroy(float time)
-    {
-        yield return new WaitForSeconds(time);
-        Destroy(gameObject);
-    }
 }
  

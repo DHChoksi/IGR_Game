@@ -80,12 +80,18 @@ public class CrosshairTargeting : MonoBehaviour
         {
             _hasHit = true;
             crosshairSpr.color = Color.green;
-            Transform root = hit.collider.attachedRigidbody ? hit.collider.attachedRigidbody.transform.root
-                                                            : hit.collider.transform.root;
+            Transform root = hit.collider.attachedRigidbody ? hit.collider.attachedRigidbody.transform
+                                                            : hit.collider.transform;
             if (_lastHitRoot != root)
             {
                 if (_lastHitRoot)
                     foreach (var t in _lastHitRoot.GetComponentsInChildren<ITargetable>(true)) t.OnHoverExit();
+                if (root)
+                    foreach (var t in root.GetComponentsInChildren<ITargetable>(true)) t.OnHoverEnter(this, hit);
+                _lastHitRoot = root;
+            }
+            else
+            {
                 if (root)
                     foreach (var t in root.GetComponentsInChildren<ITargetable>(true)) t.OnHoverEnter(this, hit);
                 _lastHitRoot = root;
