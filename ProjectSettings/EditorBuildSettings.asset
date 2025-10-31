@@ -9,15 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5fece2cc0e27e9241989ceee8d8e414a
   - enabled: 1
+    path: Assets/Scenes/Training GYM/GYM.unity
+    guid: 7079765945d958b46b622d282f0eab22
+  - enabled: 0
     path: Assets/Scenes/Trainings/StoryBoard.unity
     guid: 6ec64f6d1d775fe4691e99ec68f4bbf1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Phases/Phase_1.unity
     guid: b8e22b934b343a94b9a901ae16fc63e6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Trainings/Instruction.unity
     guid: eb0f295d03a16cb4e8a4f341a2e05a14
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Phases/Phase_2.unity
     guid: dc7e9d74517face47b64d8cdb0fece03
   m_configObjects:

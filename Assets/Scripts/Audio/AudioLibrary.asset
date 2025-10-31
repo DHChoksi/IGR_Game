@@ -14,9 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SfxClips:
   - m_SFXType: 1
-    m_SFXAudioClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
+    m_SFXAudioClip: {fileID: 8300000, guid: 6dd7024f00606b44eb5884197a66a893, type: 3}
+  - m_SFXType: 6
+    m_SFXAudioClip: {fileID: 8300000, guid: 8397cd15ba5f00244b07060926058392, type: 3}
   - m_SFXType: 4
-    m_SFXAudioClip: {fileID: 8300000, guid: f22e87740453ac248871d5e33e57d4d8, type: 3}
+    m_SFXAudioClip: {fileID: 8300000, guid: bbf4e7655f94ada47b90ab493701cc52, type: 3}
+  - m_SFXType: 2
+    m_SFXAudioClip: {fileID: 8300000, guid: e3e98ce8d8fc17f4ba24fa24a8416e27, type: 3}
+  - m_SFXType: 7
+    m_SFXAudioClip: {fileID: 8300000, guid: bbf4e7655f94ada47b90ab493701cc52, type: 3}
+  - m_SFXType: 3
+    m_SFXAudioClip: {fileID: 8300000, guid: 30860cf2220b7d14e9a624eae0191a67, type: 3}
+  - m_SFXType: 9
+    m_SFXAudioClip: {fileID: 8300000, guid: ac583e388af261c4a8f4f277a344755b, type: 3}
   m_BgMusicClips:
+  - m_BGMusicType: 2
+    m_BGMusicClip: {fileID: 8300000, guid: f063aa8cb3a112849852d0436ee21bec, type: 3}
   - m_BGMusicType: 1
-    m_BGMusicClip: {fileID: 8300000, guid: 4dbdeb933e1da9a48a55c2bbb840e223, type: 3}
+    m_BGMusicClip: {fileID: 8300000, guid: 09f7aabf4c409c4448b8631d13c8b227, type: 3}
+  - m_BGMusicType: 3
+    m_BGMusicClip: {fileID: 8300000, guid: 54ea602f56257ab43a92e52371cc8f67, type: 3}
+  - m_BGMusicType: 3
+    m_BGMusicClip: {fileID: 8300000, guid: 518ab5fadb45358468fdb66f6bd20f40, type: 3}

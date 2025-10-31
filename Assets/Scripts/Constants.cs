@@ -87,14 +87,17 @@ namespace Constants
             Grab,
             Shoot,
             Hurt,
-            CollectObject
+            CollectObject,
+            AstaroidCollision,
+            DysonSphere
         }
 
         public enum BGMType
         {
             Menu,
             Training,
-            Gameplay
+            Gameplay,
+            Battle
         }
 
         public enum HapticType

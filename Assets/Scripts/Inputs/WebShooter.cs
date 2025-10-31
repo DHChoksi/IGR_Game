@@ -28,6 +28,7 @@ public class WebShooter : MonoBehaviour
     public RaycastHit raycastHit;
 
     private bool m_GripHeld = false;
+    private bool m_SwingSoundPlaying = false;
 
     public Vector3 _CurrentGrapplePosition => m_SwingPoint;
     public Transform _GunTip => m_GunTip;
@@ -62,9 +63,13 @@ public class WebShooter : MonoBehaviour
         m_SpringJoint.damper = 0f;
         m_SpringJoint.massScale = 1f;
 
-        // Start particle system immediately
+        // Start particle system
         if (m_PullParticles != null && !m_PullParticles.isPlaying)
             m_PullParticles.Play();
+
+        // ✅ Play attach haptic & sound
+        HapticManager.Instance.Play(HapticType.WebAttach);
+        AudioManager.Instance.PlaySFX(SFXType.Shoot, 0.9f);
     }
 
     public bool IsGrappling() => m_SpringJoint != null;
@@ -76,6 +81,10 @@ public class WebShooter : MonoBehaviour
         {
             Destroy(m_SpringJoint);
             m_SpringJoint = null;
+
+            // ✅ Stop haptics and swinging sound
+            HapticManager.Instance.StopAllHaptics();
+            m_SwingSoundPlaying = false;
         }
 
         // Stop particle system
@@ -89,28 +98,21 @@ public class WebShooter : MonoBehaviour
 
         Vector3 toPoint = m_SwingPoint - m_Player.position;
         Vector3 pullDir = toPoint.normalized;
-
-        // Velocity along rope direction only
         float velAlongPull = Vector3.Dot(m_PlayerRb.linearVelocity, pullDir);
 
-        // Remove sideways velocity
+        // Limit velocity to rope direction
         m_PlayerRb.linearVelocity = pullDir * velAlongPull;
 
         // Apply pulling force if under max speed
         if (velAlongPull < m_MaxPullSpeed)
         {
             m_PlayerRb.AddForce(pullDir * m_PullForce, ForceMode.Acceleration);
-
-            // Clamp after applying force
             velAlongPull = Vector3.Dot(m_PlayerRb.linearVelocity, pullDir);
             if (velAlongPull > m_MaxPullSpeed)
-            {
                 m_PlayerRb.linearVelocity = pullDir * m_MaxPullSpeed;
-            }
         }
         else
         {
-            // Already at or above max → lock to max speed
             m_PlayerRb.linearVelocity = pullDir * m_MaxPullSpeed;
         }
 
@@ -122,11 +124,28 @@ public class WebShooter : MonoBehaviour
                 if (!m_PullParticles.isPlaying)
                     m_PullParticles.Play();
             }
-            else
+            else if (m_PullParticles.isPlaying)
             {
-                if (m_PullParticles.isPlaying)
-                    m_PullParticles.Stop();
+                m_PullParticles.Stop();
             }
+        }
+
+        // --- Haptic + Sound While Swinging ---
+        if (velAlongPull > m_MinVelocityThreshold)
+        {
+            // Light haptic while moving
+            HapticManager.Instance.Play(HapticType.WebSwing);
+
+            // ✅ Continuous swing sound
+            if (!m_SwingSoundPlaying)
+            {
+                AudioManager.Instance.PlaySFX(SFXType.Jetpack, 0.6f);
+                m_SwingSoundPlaying = true;
+            }
+        }
+        else if (m_SwingSoundPlaying)
+        {
+            m_SwingSoundPlaying = false;
         }
     }
 
